@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Log</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nabla&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://robohash.org/cool.png" alt="Cool Avatar" class="avatar">
+    <h2>THE READING ROOM</h2>
+    </div>
+    <hr> 
+    <!-- Button to show/hide old reviews -->
+    <button id="toggle-reviews-button">Show Previous Reviews</button>
+
+    <!-- Section to display old book reviews, hidden by default -->
+    <section id="book-list" class="book-list" style="display: none;">
+        <!-- Book reviews will be dynamically inserted here by JavaScript -->
+    </section>
+
+    <section class="form-container">  
+        <!-- <h3>Book Name</h3>
+        <p>Share a quick book review!</p>
+        <p>Input pages</p>
+        <p>Input author </p>
+        <p>Input ISBN</p> -->
+
+
+    </section> 
+    <input type="text" id="input-book-name" placeholder="Enter book name">
+    <input type="text" id="input-book-review" placeholder="Enter book review">
+    <input type="number" id="input-book-pages" placeholder="Enter book pages">
+    <input type="text" id="input-book-author" placeholder="Enter book author">
+    <input type="text" id="input-book-isbn" placeholder="Enter book ISBN">
+
+
+
+    <button id="add-review-button">Add a Book</button>
+    <button id="update-review-button" style="display: none;">Update Book</button>
+    
+    <script src="app.js"></script>
+</body>
+</html>
+
+
