@@ -31,13 +31,13 @@ function addBookReview(book) {
 
     
     // Append the book name, review, pages, author, ISBN to the wrapper section
-    bookReviewWrapper.appendChild(bookName);
-    bookReviewWrapper.appendChild(bookReview);
-    bookReviewWrapper.appendChild(bookPages);
-    bookReviewWrapper.appendChild(bookAuthor);
-    bookReviewWrapper.appendChild(bookIsbn);
-    bookReviewWrapper.appendChild(editButton);
-    bookReviewWrapper.appendChild(deleteButton);
+    bookDiv.appendChild(bookName);
+    bookDiv.appendChild(bookReview);
+    bookDiv.appendChild(bookPages);
+    bookDiv.appendChild(bookAuthor);
+    bookDiv.appendChild(bookIsbn);
+    bookDiv.appendChild(editButton);
+    bookDiv.appendChild(deleteButton);
     bookReviewWrapper.appendChild(bookDiv);
 
 }
@@ -84,12 +84,14 @@ addReviewButton.onclick = function addNewReview() {
 
                                                 
 function deleteBook(bookId) {
+    if (confirm("Are you sure you want to delete this book?")){
     fetch(`http://127.0.0.1:8080/books/${bookId}`, {
         method: "DELETE"
     }).then(response => {
         console.log("Book deleted!", response);
         loadBooksFromServer();                       
-    });
+        });
+    }
 }
 
 
@@ -101,10 +103,12 @@ function fillFormForEdit(book) {                                //fill the form 
     document.querySelector("#input-book-author").value = book.author;
     document.querySelector("#input-book-isbn").value = book.isbn;
     selectedBookId = book.id;                                   // Set the selectedBookId to the book being edited
- 
+
+
     document.getElementById("add-review-button").style.display = "none";     //hide the add button
     document.getElementById("update-review-button").style.display = "inline-block"; //Show the update button 
 }
+
 
 
 document.getElementById("update-review-button").onclick = function updateBookReview() { // this function will update the book form.
