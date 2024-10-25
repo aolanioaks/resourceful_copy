@@ -16,9 +16,7 @@ function addBookReview(book) {
     let deleteButton = document.createElement("button");
     let editButton = document.createElement("button");
 
-
-    
-    bookName.textContent = book.name;   //setting the text content of the elements
+    bookName.textContent = book.name;                               //setting the text content of the elements
     bookReview.textContent = book.review;
     bookPages.textContent = book.pages;
     bookAuthor.textContent = book.author;
@@ -95,17 +93,17 @@ function deleteBook(bookId) {
 }
 
 
-function fillFormForEdit(book) {                                //fill the form to update the book
+function fillFormEdit(book) {                                
     console.log("book id: ", book.id);
     document.querySelector("#input-book-name").value = book.name;
     document.querySelector("#input-book-review").value = book.review;
     document.querySelector("#input-book-pages").value = book.pages;
     document.querySelector("#input-book-author").value = book.author;
     document.querySelector("#input-book-isbn").value = book.isbn;
-    selectedBookId = book.id;                                   // Set the selectedBookId to the book being edited
+    selectedBookId = book.id;                                                       // Set the selectedBookId to the book being edited
 
 
-    document.getElementById("add-review-button").style.display = "none";     //hide the add button
+    document.getElementById("add-review-button").style.display = "none";            //hide the add button
     document.getElementById("update-review-button").style.display = "inline-block"; //Show the update button 
 }
 
@@ -146,7 +144,7 @@ document.getElementById("update-review-button").onclick = function updateBookRev
     };
 }
 
-// This function will be reseting the form and this will
+// This function will be reseting the form and will
 // switch buttons after an update.
 function resetForm() {
     document.querySelector("#input-book-name").value = "";
@@ -154,10 +152,10 @@ function resetForm() {
     document.querySelector("#input-book-pages").value = "";
     document.querySelector("#input-book-author").value = "";
     document.querySelector("#input-book-isbn").value = "";
-    selectedBookId = null;                                        // Reset the selected book ID
+    selectedBookId = null;                                                              // Reset the selected book ID
 
-    document.getElementById("add-review-button").style.display = "inline-block"; // Show the "Add" button
-    document.getElementById("update-review-button").style.display = "none";  // hide the update button
+    document.getElementById("add-review-button").style.display = "inline-block";       // Show the "Add" button
+    document.getElementById("update-review-button").style.display = "none";            // hide the update button
 }
 
 loadBooksFromServer();

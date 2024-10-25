@@ -1,5 +1,5 @@
 #server.py
-from flask import Flask, request, json
+from flask import Flask, request
 from books import BooksDB
 
 
@@ -22,20 +22,20 @@ def options_book(book_id=None):
                     }
 
 
-
 @app.route("/books", methods=["GET"])
 def retrieve_books():
     db = BooksDB("books_db.db")
     return db.getBooks(), {"Access-Control-Allow-Origin" : "*"}
 
 
-@app.route("/books", methods=["GET"])
-def list_books():
+@app.route("/books/<int:book_id>", methods=["GET"])
+def retrieve_book(book_id):
     db = BooksDB("books_db.db")
-    books = db.getBooks() 
-    books_json = json.dumps(books) 
-    return books_json, 200, {'Content-Type': 'application/json'}
-
+    if db.getBook(book_id):
+        return db.getBook(book_id), {"Access-Control-Allow-Origin" : "*"}
+    else:
+        return "Book not found", 404, {"Access-Control-Allow-Origin": "*"}
+    
 
 
 @app.route("/books", methods=["POST"])
