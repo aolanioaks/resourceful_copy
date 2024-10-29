@@ -34,7 +34,7 @@ def retrieve_book(book_id):
     if db.getBook(book_id):
         return db.getBook(book_id), {"Access-Control-Allow-Origin" : "*"}
     else:
-        return "Book not found", 404, {"Access-Control-Allow-Origin": "*"}
+        return f"Book with {book_id} not found", 404, {"Access-Control-Allow-Origin": "*"}
     
 
 
@@ -63,7 +63,7 @@ def delete_book(book_id):
             "Access-Control-Allow-Methods": "DELETE, OPTIONS"
         }
     else:
-        return "Not found", 404, {"Access-Control-Allow-Origin": "*"}
+        return f"Book with {book_id} not found", 404, {"Access-Control-Allow-Origin": "*"}
     
 
 @app.route("/books/<int:book_id>", methods=["PUT"])

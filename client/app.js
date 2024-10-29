@@ -1,11 +1,13 @@
 console.log("connected");
 
 let bookReviewWrapper = document.querySelector("section");
-let toggleReviewsButton = document.getElementById("toggle-reviews-button");
-let selectedBookId = null; 
+let previousReviewButton = document.getElementById("previous-reviews-button");
+let selectedBookId = null;   //this will help kkeep track of currently selected bookID
+let addReviewButton = document.querySelector("#add-review-button");
 
 
-function addBookReview(book) {
+
+function addBook(book) {
     // Create HTML elements for the book name, review, pages, author, isbn
     let bookDiv = document.createElement("div");
     let bookName = document.createElement("h3");
@@ -16,7 +18,8 @@ function addBookReview(book) {
     let deleteButton = document.createElement("button");
     let editButton = document.createElement("button");
 
-    bookName.textContent = book.name;                               //setting the text content of the elements
+    //setting the text content of the elements
+    bookName.textContent = book.name;                           
     bookReview.textContent = book.review;
     bookPages.textContent = book.pages;
     bookAuthor.textContent = book.author;
@@ -25,7 +28,7 @@ function addBookReview(book) {
     deleteButton.textContent = "Delete";
     deleteButton.onclick = () => deleteBook(book.id);
     editButton.textContent = "Edit";
-    editButton.onclick = () => fillFormForEdit(book);
+    editButton.onclick = () => fillBookForm(book);
 
     
     // Append the book name, review, pages, author, ISBN to the wrapper section
@@ -40,17 +43,17 @@ function addBookReview(book) {
 
 }
 
+//loading books from the 127.0.
 function loadBooksFromServer() {
     fetch("http://127.0.0.1:8080/books")
         .then(response => response.json())
         .then(data => {
             console.log("Fetched data:", data); 
             bookReviewWrapper.textContent = ""; 
-            data.forEach(addBookReview); 
+            data.forEach(addBook); 
         });
 }
 
-let addReviewButton = document.querySelector("#add-review-button");
 addReviewButton.onclick = function addNewReview() { 
     console.log("button clicked");
     let inputBookName = document.querySelector("#input-book-name");
@@ -93,7 +96,7 @@ function deleteBook(bookId) {
 }
 
 
-function fillFormEdit(book) {                                
+function fillBookForm(book) {                                
     console.log("book id: ", book.id);
     document.querySelector("#input-book-name").value = book.name;
     document.querySelector("#input-book-review").value = book.review;
@@ -109,7 +112,7 @@ function fillFormEdit(book) {
 
 
 
-document.getElementById("update-review-button").onclick = function updateBookReview() { // this function will update the book form.
+document.getElementById("update-review-button").onclick = function UpdateBookForm() { // this function will update the book form.
     console.log("Updated button clicked!");
     if (selectedBookId !== null) {
         let inputBookName = document.querySelector("#input-book-name");
@@ -138,36 +141,35 @@ document.getElementById("update-review-button").onclick = function updateBookRev
         }).then(response => {
             console.log("Book updated!", response);
             loadBooksFromServer();
-            resetForm();
+            resetBookForm();
         });
         
     };
 }
 
-// This function will be reseting the form and will
-// switch buttons after an update.
-function resetForm() {
+// reseting the form and will back to normal and switching buttons after an update.
+function resetBookForm() {
     document.querySelector("#input-book-name").value = "";
     document.querySelector("#input-book-review").value = "";
     document.querySelector("#input-book-pages").value = "";
     document.querySelector("#input-book-author").value = "";
     document.querySelector("#input-book-isbn").value = "";
-    selectedBookId = null;                                                              // Reset the selected book ID
+    selectedBookId = null;                                                              
 
-    document.getElementById("add-review-button").style.display = "inline-block";       // Show the "Add" button
-    document.getElementById("update-review-button").style.display = "none";            // hide the update button
+    document.getElementById("add-review-button").style.display = "inline-block";      
+    document.getElementById("update-review-button").style.display = "none";            
 }
 
 loadBooksFromServer();
 
-toggleReviewsButton.addEventListener("click", function() {
+previousReviewButton.addEventListener("click", function() {
     if (bookReviewWrapper.style.display === "none" || !bookReviewWrapper.style.display) {
         bookReviewWrapper.style.display = "block";
         loadBooksFromServer();
-        toggleReviewsButton.textContent = "Hide Previous Reviews";
+        previousReviewButton.textContent = "Hide Previous Reviews";
     } else {
         bookReviewWrapper.style.display = "none";
-        toggleReviewsButton.textContent = "Show Previous Reviews";
+        previousReviewButton.textContent = "Show Previous Reviews";
     }
 });
 
