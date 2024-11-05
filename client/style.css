@@ -87,7 +87,7 @@ section div {
     text-align: center;
 }
 
-#toggle-reviews-button {
+#previous-reviews-button {
     margin: 20px;
     padding: 10px 20px;
     background-color: darkblue;
@@ -98,6 +98,6 @@ section div {
     transition: background-color 0.3s;
 }
 
-#toggle-reviews-button:hover {
+#previous-reviews-button:hover {
     background-color: darkgray;
 }

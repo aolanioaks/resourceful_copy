@@ -5,7 +5,9 @@ let previousReviewButton = document.getElementById("previous-reviews-button");
 let selectedBookId = null;   //this will help kkeep track of currently selected bookID
 let addReviewButton = document.querySelector("#add-review-button");
 
-
+const apiUrl = window.location.protocol === 'file:'
+    ? 'http://localhost:8080'  //local api server during development
+    : ''; // production ap
 
 function addBook(book) {
     // Create HTML elements for the book name, review, pages, author, isbn
