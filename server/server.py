@@ -5,12 +5,6 @@ from books import BooksDB
 
 app = Flask(__name__)
 
-# BOOKS = [                        
-#     "The Housemaid",
-#     "Ugly Love",
-#     "Verity"
-# ]
-
 
 @app.route("/books", methods=["OPTIONS"])
 @app.route("/books/<int:book_id>", methods=["OPTIONS"])
