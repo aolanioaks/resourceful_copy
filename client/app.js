@@ -7,7 +7,7 @@ let addReviewButton = document.querySelector("#add-review-button");
 
 const apiUrl = window.location.protocol === 'file:'
     ? 'http://localhost:8080'  //local api server during development
-    : ''; // production ap
+    : ''; // production api
 
 function addBook(book) {
     // Create HTML elements for the book name, review, pages, author, isbn
@@ -47,7 +47,7 @@ function addBook(book) {
 
 //loading books from the 127.0.
 function loadBooksFromServer() {
-    fetch("http://127.0.0.1:8080/books")
+    fetch(`${apiUrl}/books`)
         .then(response => response.json())
         .then(data => {
             console.log("Fetched data:", data); 
@@ -73,7 +73,7 @@ addReviewButton.onclick = function addNewReview() {
 
 
     // Send new review to the server POST
-    fetch("http://127.0.0.1:8080/books", {
+    fetch(`${apiUrl}/books`, {
         method: "POST",
         body: data,
         headers: {
@@ -88,7 +88,7 @@ addReviewButton.onclick = function addNewReview() {
                                                 
 function deleteBook(bookId) {
     if (confirm("Are you sure you want to delete this book?")){
-    fetch(`http://127.0.0.1:8080/books/${bookId}`, {
+    fetch(`${apiUrl}/books/${bookId}`, {
         method: "DELETE"
     }).then(response => {
         console.log("Book deleted!", response);
@@ -134,7 +134,7 @@ document.getElementById("update-review-button").onclick = function UpdateBookFor
 
 
         // Send the updated book review to the server PUT
-        fetch(`http://127.0.0.1:8080/books/${selectedBookId}`, { 
+        fetch(`${apiUrl}/books/${selectedBookId}`, { 
             method: "PUT",
             body: data,
             headers: {
